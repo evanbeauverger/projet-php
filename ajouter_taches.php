@@ -1,22 +1,27 @@
 <?php
-// Connexion à la base de données
-$dbh = new PDO('mysql:host=localhost;dbname=tache', $user, $pass);
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tache'])) {
+// Vérifier si la description de la tâche est envoyée
+if (isset($_POST['tache'])) {
+    // Récupérer la description de la tâche
     $tache = $_POST['tache'];
-    // Préparation de la requête
-    $stmt = $dbh->prepare("INSERT INTO taches (tache) VALUES ($tache)");
 
-    // Exécution de la requête
+    // Connexion à la base de données
+    $conn = new mysqli("localhost", "root", "", "taches_db");
+
+    // Vérifier la connexion
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Préparer et exécuter la requête d'insertion
+    $stmt = $conn->prepare("INSERT INTO taches (tache) VALUES (?)");
+    $stmt->bind_param("s", $tache);  // "s" indique que la variable est une chaîne
     $stmt->execute();
+
+    // Fermer la connexion
+    $stmt->close();
+    $conn->close();
 }
-?>
-<html>
-    <body>
-    <center>
-        <h1>Tâche ajoutée à la liste de tâche</h1>
-        <form action="main.html" >
-            <button>Accueil</button>
-        </form>
-    </center>
-    </body>
-</html>
+
+// Rediriger vers la page d'accueil
+header("Location: index.php");
+exit();
