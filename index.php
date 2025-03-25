@@ -7,11 +7,12 @@
 <center>   
 <h1> To do list </h1>
 <br>
-
+<!--ajouter une tâche -->
  <form action="liste-taches.php" method="post">
   Ajouter une tâche : <input type=text id="tache" name="tache">  <input type=submit value="Ajouter" >
  </form>
  <br>
+ <!-- voir la liste de tâche -->
  <form action="liste-taches.php" >
   Voir la liste de tâches : <input type=submit value="liste tâches" >
  </form>
