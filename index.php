@@ -8,12 +8,12 @@
 <h1> To do list </h1>
 <br>
 
- <form action="ajout-tache.html" method="post">
-  Ajouter une tâche : <input type=submit id="tache" name="tache" value="ajouter">
+ <form action="liste-taches.php" method="post">
+  Ajouter une tâche : <input type=text id="tache" name="tache">  <input type=submit value="Ajouter" >
  </form>
  <br>
  <form action="liste-taches.php" >
-  Consulter la liste de tâches : <input type=submit value="consulter" >
+  Voir la liste de tâches : <input type=submit value="liste tâches" >
  </form>
  
 </center>

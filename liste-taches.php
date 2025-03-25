@@ -1,60 +1,35 @@
-<?php
-// Connexion à la base de données
-$conn = new mysqli("localhost", "root", "", "taches_db");
+<html>
+    <center>
+    <h1>Liste de tâches</h1>
 
-// Vérifier la connexion
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+<?php
+$dbh = new PDO('mysql:host=localhost;dbname=db_tache', "root", "");
+$stmt = $pdo->query("SELECT nom_tache FROM tache");
+
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    echo $row['tache'] . " " . "<input type='checkbox' />" . "<br>";
+}
+echo "<br><br>";
+echo "<input type='submit' name='tache_fait' id='tache_fait' value='Enregistrer'>";
+echo "</form>";
+
+if (isset($_POST['tache-fait'])) {
+    // Vérifier si des tâches ont été sélectionnées
+    if (isset($_POST['taches'])) {
+
+        $taches_cochées = $_POST['taches'];
+
+        foreach ($taches_cochées as $id) {
+
+            $dbh = new PDO('mysql:host=localhost;dbname=test', $user, $pass);
+            $stmt = $dbh->prepare("DELETE FROM tache WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        }
+    }
 }
 
-// Récupérer toutes les tâches
-$result = $conn->query("SELECT id, description, fait FROM taches ORDER BY date_creation DESC");
-
 ?>
+    
+    </center>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des tâches</title>
-</head>
-<body>
-    <h1>Liste des tâches</h1>
-
-    <form action="enregistrer_taches.php" method="POST">
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Tâche</th>
-                    <th>Fait</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Vérifier si des tâches existent
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        // Afficher chaque tâche avec une case à cocher
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                        echo "<td><input type='checkbox' name='taches[]' value='" . $row['id'] . "' " . ($row['fait'] ? 'checked' : '') . "></td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='2'>Aucune tâche trouvée.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-
-        <button type="submit">Enregistrer</button>
-    </form>
-
-</body>
-</html>
-
-<?php
-// Fermer la connexion
-$conn->close();
-?>
