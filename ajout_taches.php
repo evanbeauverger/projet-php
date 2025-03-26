@@ -2,7 +2,7 @@
 $tache = $_POST['tache'];
 if ($tache){
     // Connexion à la base de données
-    $dbh = new PDO('mysql:host=localhost;dbname=db_tache', "root", "");
+    $dbh = new PDO('mysql:host=localhost;dbname=db_tache', "root", "root");
 
     // Préparation de la requête
     $stmt = $dbh->prepare("INSERT INTO tache (nom_tache) VALUES (:tache)");
