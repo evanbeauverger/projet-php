@@ -14,13 +14,13 @@ use Monolog\Handler\StreamHandler;
 <div style="text-align: center;">  
 
     <h1> To do list </h1>
-    <br>
+    <br/>
     
     <!--ajouter une tâche -->
     <form action="ajout_taches.php" method="post">
     Ajouter une tâche : <input type=text id="tache" name="tache">  <input type=submit value="Ajouter" >
     </form>
-    <br>
+    <br/>
     
     <!-- voir la liste de tâche -->
     <form action="liste-taches.php" >

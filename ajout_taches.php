@@ -3,12 +3,13 @@ require 'vendor/autoload.php';
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+$loader = new \Twig\Loader\FilesystemLoader('templates');
+$twig = new \Twig\Environment($loader);
 
 $tache = $_POST['tache'];
 if ($tache){
     // Connexion à la base de données
-
-    $dbh = new PDO('mysql:host=localhost;dbname=db_tache', "root", "root");
+    $dbh = new PDO("mysql:host=localhost;dbname=db_tache", "root", "root");
 
     // Préparation de la requête
     $stmt = $dbh->prepare("INSERT INTO tache (nom_tache) VALUES (:tache)");
@@ -25,21 +26,8 @@ if ($tache){
     $log = new Logger('fichier.log');
     $log->info("La tâche à été ajoutée");
 
+    
 }
+
+echo $twig->render('ajout.html.twig', ['tache' => $tache]);
 ?>
-<html>
-    <div style="text-align: center;">
-
-        <h1>Tâche ajouté</h1>
-        <form action="index.php">
-            <input type="submit" value="retour">
-        </form>
-
-        <!-- voir la liste de tâche -->
-        <form action="liste-taches.php" >
-        Voir la liste de tâches : <input type=submit value="liste tâches" >
-        </form>
-
-    </div>
-
-</html>

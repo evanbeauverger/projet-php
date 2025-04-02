@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout de Tâche</title>
+</head>
+<body>
+    <div style="text-align: center;">
+
+        <h1>Tâche ajouté</h1>
+        <form action="index.php">
+            <input type="submit" value="retour">
+        </form>
+        <br/>
+        La tâche "{{ tache }}" a bien été ajouté.
+        <br/><br/>
+        <!-- voir la liste de tâche -->
+        <form action="liste-taches.php" >
+        Voir la liste de tâches : <input type=submit value="liste tâches" >
+        </form>
+
+    </div>
+</body>
+</html>
