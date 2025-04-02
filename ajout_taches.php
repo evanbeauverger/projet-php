@@ -1,4 +1,9 @@
 <?php
+require 'vendor/autoload.php';
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 $tache = $_POST['tache'];
 if ($tache){
     // Connexion à la base de données
@@ -23,8 +28,18 @@ if ($tache){
 }
 ?>
 <html>
-    <center>
-    <h1>Tâche ajouté</h1>
-    <form action="index.php">
-        <input type="submit" value="retour">
-    </form>
+    <div style="text-align: center;">
+
+        <h1>Tâche ajouté</h1>
+        <form action="index.php">
+            <input type="submit" value="retour">
+        </form>
+
+        <!-- voir la liste de tâche -->
+        <form action="liste-taches.php" >
+        Voir la liste de tâches : <input type=submit value="liste tâches" >
+        </form>
+
+    </div>
+
+</html>

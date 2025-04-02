@@ -3,6 +3,13 @@
     <h1>Liste de tâches</h1>
 
 <?php
+require 'vendor/autoload.php';
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+$loader = new \Twig\Loader\FilesystemLoader('templates');
+$twig = new \Twig\Environment($loader);
+
 // connexion BD
 $dbh = new PDO('mysql:host=localhost;dbname=db_tache', "root", "root");
 
